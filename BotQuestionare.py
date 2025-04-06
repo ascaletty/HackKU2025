@@ -7,10 +7,14 @@ import pandas as pd
 from runmodel import runmodel
 
 async def questionnaire(message):
+    file_name = "questionaredata/" + message.author.name + ".csv"
     if message.guild is not None:
-        await intro(message)
+        if os.path.isfile(file_name): # if there's already a predefined file:
+            await message.author.send(' Welcome back! We\'ll just continue where we left off')
+
+        else:
+            await intro(message)
     else:  # if the message is a dm
-        file_name = "questionaredata/" + message.author.name + ".csv"
         try:
             file = open(file_name)
         except FileNotFoundError:
