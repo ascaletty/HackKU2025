@@ -20,8 +20,11 @@ how to run it:
 
 
 Running SKilearnRandomForests.py amd SKilearnNaiveBayers.py
+
 1.run python Pyquestions.py yourname.csv
+
 2.run python SkleanRandomForests.py or SKilearnNaiveBayes.py with the argument yourname.csv
+
 3. see output in terminal :)
 
 
