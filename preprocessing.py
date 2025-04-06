@@ -1,3 +1,96 @@
+import pandas as pd 
+import seaborn as sns 
+import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestClassifier  
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+import pickle as pk
+from sklearn.model_selection import train_test_split, KFold, cross_val_score 
+depression_data = pd.read_csv('reprocessed_data.csv')
+
+X = depression_data.drop(columns=['Depression'])  # Replace 'Depression' with the actual target column name
+y = depression_data['Depression']  # Replace 'Depression' with the actual target column name
+
+def RFPredictionModel():
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+    model = RandomForestClassifier(n_estimators=100, random_state=42)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    precision = precision_score(y_test, y_pred)
+
+    return [model, accuracy, precision]
+
+def RFPredictionModelWithKFold():
+
+    model = RandomForestClassifier(n_estimators=100, random_state=42)
+    kf = KFold(n_splits=10, shuffle=True, random_state=42)  
+    cv_scores = cross_val_score(model, X, y, cv=kf, scoring='accuracy')
+    
+    return [model, cv_scores.mean(), cv_scores.std()]
+
+
+
+"""
+# Load Terry's data with the correct header
+terrys_depression_data = pd.read_csv('terrys_data.csv', header=0)  # Ensure the first row is treated as the header
+print("Terry's Data (After Loading):")
+print(terrys_depression_data)
+
+# Check if the dataset is empty
+if terrys_depression_data.empty:
+    raise ValueError("Terry's data is empty. Please check the CSV file.")
+
+# Rename columns to match the training data
+column_mapping = {
+    "Gender": "Gender",
+    "Age": "Age",
+    "Academic Pressure": "Academic Pressure",
+    "Work Pressure": "Work Pressure",
+    "CGPA": "CGPA",
+    "Study Satisfaction": "Study Satisfaction",
+    "Job Satisfaction": "Job Satisfaction",
+    "Sleep Hours": "Sleep Duration",  # Match training data column name
+    "Diet": "Dietary Habits",  # Match training data column name
+    "Suicidal Thoughts": "Have you ever had suicidal thoughts ?",  # Match training data column name
+    "Study Hours": "Study Time",  # Match training data column name
+    "Financial Pressure": "Financial Stress",  # Match training data column name
+    "Family Mental Illness": "Family History of Mental Illness",  # Match training data column name
+    "Depression": "Depression"  # Target column
+}
+
+# Apply the column mapping
+terrys_depression_data.rename(columns=column_mapping, inplace=True)
+
+# Drop the 'Depression' column if it exists
+if 'Depression' in terrys_depression_data.columns:
+    terrys_depression_data_without_depression = terrys_depression_data.drop(columns=['Depression'])
+else:
+    terrys_depression_data_without_depression = terrys_depression_data
+
+# Ensure all columns in the training data are present in Terry's data
+for col in X.columns:
+    if col not in terrys_depression_data_without_depression.columns:
+        print(f"Column '{col}' is missing in Terry's data. Adding it with default value 0.")
+        terrys_depression_data_without_depression[col] = 0  # Add missing columns with default value
+
+# Ensure the column order matches the training data
+terrys_depression_data_without_depression = terrys_depression_data_without_depression[X.columns]
+
+# Check if the dataset is still empty after processing
+if terrys_depression_data_without_depression.empty:
+    raise ValueError("Terry's data is empty after processing. Please check the input data.")
+
+# Use the model to make predictions
+terrys_depression_prediction_raw = model.predict(terrys_depression_data_without_depression)
+if terrys_depression_prediction_raw == [1]:
+    terrys_depression_prediction = "Yes"
+else:
+    terrys_depression_prediction = "No"
+# Print the prediction result
+print(f"Terry's Depression Prediction: {terrys_depression_prediction}")
+"""
+"""
 import pandas as pd #Im using pandas to read the csv file
 
 depression_data = pd.read_csv('reprocessed_data.csv') 
@@ -103,3 +196,4 @@ else:
 # Print the prediction result
 print(f"Terry's Depression Prediction: {terrys_depression_prediction}")
 
+"""
