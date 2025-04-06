@@ -169,26 +169,30 @@ def gender(message):
         financial_pressure, family_mental_illness, Depression
     ]
 
-    # Save data to a CSV file
-    file_exists = os.path.isfile(file_name)
-
     with open("questionaredata/" + file_name, "a", newline="") as file:
         writer = csv.writer(file)
         # Write header only if the file is new
-        if not file_exists:
-            writer.writerow([
-                "Gender", "Age", "Academic Pressure", "CGPA",
-                "Study Satisfaction", "Sleep Hours", "Diet",
-                "Suicidal Thoughts", "Study Hours", "Financial Pressure",
-                "Family Mental Illness", "Depression"
-            ])
+        
         writer.writerow(data)
 
-    return data
 
+<<<<<<< HEAD
 
 def add_to_file(file_name):
     file = open
 
 # Collect and save data
 
+=======
+def add_to_file(file_name, data):
+    file_exists = os.path.isfile("questionaredata/" + file_name)
+    file = open("questionaredata/" + file_name, 'a')
+    if not file_exists:
+        file.write("Gender, Age, Academic Pressure, CGPA,")
+        file.write("Study Satisfaction, Sleep Hours, Diet,")
+        file.write("Suicidal Thoughts, Study Hours, Financial Pressure,")
+        file.write("Family Mental Illness, Depression\n")
+    else:
+        file.write(",")
+    file.write(str(data))
+    file.close()
