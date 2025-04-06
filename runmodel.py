@@ -9,9 +9,11 @@ def runmodel(file_name):
     print(userdf)
     if depression_prediction_raw == 1:
         depression_prediction = True
+        return depression_prediction
         print(depression_prediction)
     else:
         depression_prediction = False
         print(depression_prediction)
+        return depression_prediction
 file_name='test.csv'
 runmodel(file_name)
