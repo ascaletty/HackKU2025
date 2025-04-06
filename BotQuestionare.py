@@ -7,10 +7,14 @@ import pandas as pd
 from runmodel import runmodel
 
 async def questionnaire(message):
+    file_name = "questionaredata/" + message.author.name + ".csv"
     if message.guild is not None:
-        await intro(message)
+        if os.path.isfile(file_name): # if there's already a predefined file:
+            await message.author.send(' Welcome back! We\'ll just continue where we left off')
+
+        else:
+            await intro(message)
     else:  # if the message is a dm
-        file_name = "questionaredata/" + message.author.name + ".csv"
         try:
             file = open(file_name)
         except FileNotFoundError:
@@ -90,9 +94,10 @@ async def questionnaire(message):
 
 async def intro(message):
     await message.author.send("Hi! I'm DepressoBot, your friendly AI depression indicator!\n"
-                              "But before we test you using our machine learning powered questionare, but first, "
+                              "But before we test you using our machine learning powered questionare "
                               "there's something we need to discuss\n"
-                              "THIS IS NOT A MEDICAL DIAGNOSIS. This is just a fun questionare made for HACKKU25")
+                              "THIS IS NOT A MEDICAL DIAGNOSIS. This is just a fun questionare made for HACKKU25; "
+                              "we are not doctors, just a bunch of caffeinated coders")
     await message.author.send("First question: what is your gender? Please respond M, F, or O")
 
 
