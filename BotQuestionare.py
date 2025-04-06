@@ -28,15 +28,15 @@ async def intro(message):
     await message.author.send("First question: what is your gender? Please respond M, F, or O")
 
 
-
+#Question 1
 async def gender(message):
-    if message.content.strip() == "M":
+    if message.content.strip().upper() == "M":
         gender_i = 1
         await message.author.send("Now, what's your age?")
-    elif message.content.strip() == "F":
+    elif message.content.strip().upper() == "F":
         gender_i = 0
         await message.author.send("Now, what's your age?")
-    elif message.content.strip() == "O":
+    elif message.content.strip().upper() == "O":
         gender_i = 0
         await message.author.send("Now, what's your age?")
     else:
@@ -46,104 +46,138 @@ async def gender(message):
 
     return gender_i
 
+#Question 2
+async def age(message):
+    try:
+        age = int(message.content.strip())
+        if(age < 0):
+            raise
+        await message.author.send("Alright, now how pressured do you feel to perform well academically from 1-5?")
+    except:
+        await message.author.send("Please enter a positive age as a whole number.")
+        await message.author.send("Now, what's your age?")
+        age = None
 
+    return age
 
-async def age:
-    age = None
-    while (age is None):
-        try:
-            age = int(input("Age: ").strip())
-            if age < 0:
+#Question 3
+async def academic_pressure(message):
+    try:
+        academic_pressure = int(message.content.strip())
+        if (academic_pressure > 5 or academic_pressure < 1):
+            raise
+        await message.author.send("What is your current GPA? (4.0 Scale)")
+    except:
+        await message.author.send("I'm sorry, please enter a whole number from 1 to 5")
+        await message.author.send("Alright, now how pressured do you feel to perform well academically from 1-5?")
+        academic_pressure = None
+    
+    return academic_pressure
+
+#Question 4
+async def CGPA(message):
+    try:
+        CGPA = float(message.content.strip())
+        if (CGPA < 0 or CGPA > 4):
                 raise
-        except:
-            print("Please enter a positive number.")
-            age = None
+        CGPA = CGPA / 4.0 * 10
+        await message.author.send("Ok, from a scale of 1-5 how satisfied would you say you currently are about your studies?")
+    except:
+        await message.author.send("Please enter a valid GPA on the 4.0 scale (0.0 - 4.0).")
+        await message.author.send("What is your current GPA? (4.0 Scale)")
+        CGPA = None
 
-    academic_pressure = None
-    while (academic_pressure is None):
-        try:
-            academic_pressure = int(input("Academic Pressure (1-5)(int)): ").strip())
-            if (academic_pressure > 5 or academic_pressure < 1):
-                raise
-        except:
-            print("Please enter a number between 1 and 5.")
-            academic_pressure = None
+    return CGPA
 
-    CGPA = None
-    while (CGPA is None):
-        try:
-            CGPA = float(input("What is your GPA(4.0 Scale): ").strip())
-            if (CGPA < 0 or CGPA > 4):
-                raise
-            CGPA = CGPA / 4.0 * 10
-        except:
-            print("Please enter a positive number.")
-            CGPA = None
+#Question 5
+async def study_satisfaction(message):
+    try:
+        study_satisfaction = int(message.content.strip())
+        if (study_satisfaction > 5 or study_satisfaction < 1):
+            raise
+        await message.author.send("How many hours do you sleep per night?")
+    except:
+        await message.author.send("I'm sorry, please enter a whole number from 1 to 5")
+        await message.author.send("Ok, from a scale of 1-5 how satisfied would you say you currently are about your studies?")
+        study_satisfaction = None
+    
+    return study_satisfaction
 
-    study_satisfaction = None
-    while (study_satisfaction is None):
-        try:
-            study_satisfaction = int(input("study_satisfaction (1-5)(int)): ").strip())
-            if (study_satisfaction > 5 or study_satisfaction < 1):
-                raise
-        except:
-            print("Please enter a number between 1 and 5.")
-            study_satisfaction = None
+#Question 6
+async def sleep_hours(message):
+    try:
+        sleep_hours_raw = int(message.content.strip())
+        if (sleep_hours_raw > 24 or sleep_hours_raw < 0):
+            raise
 
-    sleep_hours_raw = float(input("How many hours a night do you sleep?: ").strip())
-    while (sleep_hours_raw is None):
-        try:
-            sleep_hours_raw = int(input("Academic Pressure (1-5)(int)): ").strip())
-            if (sleep_hours_raw > 24 or sleep_hours_raw < 0):
-                raise
-        except:
-            print("Please enter a number between 0 and 24.")
-            sleep_hours_raw = None
+        if sleep_hours_raw < 5:
+            sleep_hours = 1
+        elif sleep_hours_raw < 6.5:
+            sleep_hours = 2
+        elif sleep_hours_raw < 8:
+            sleep_hours = 3
+        elif sleep_hours_raw > 8:
+            sleep_hours = 4
+        else:
+            raise
 
-    if sleep_hours_raw < 5:
-        Sleep_hours = 1
-    elif sleep_hours_raw < 6.5:
-        Sleep_hours = 2
-    elif sleep_hours_raw < 8:
-        Sleep_hours = 3
-    elif sleep_hours_raw > 8:
-        Sleep_hours = 4
-    else:
-        print("Invalid input. Please enter a number")
+        await message.author.send("Now, how would you describe your diet, (U)unhealthy, (M)oderate, or (H)ealthy?")
+    except:
+        await message.author.send("Enter a valid number.")
+        await message.author.send("How many hours do you sleep per night?")
+        sleep_hours = None
+    
+    return sleep_hours
 
-    diet = None
-    while diet is None:
-        diet = input("Is your diet (U)nhealthy, (H)ealthy, or (M)oderate?: ").strip().upper()
-        if diet == "U":
+#Question 7
+async def diet(message):
+    content = message.content.strip().upper()
+    try:
+        if content == 'U':
             diet = 1
-        elif diet == "M":
+        elif content == 'M':
             diet = 2
-        elif diet == "H":
+        elif content == 'H':
             diet = 3
         else:
-            print("Invalid input. Please enter 'U', 'H', or 'M'.")
-            diet = None
+            raise
+        await message.author.send("Have you ever experienced suicidal thoughts (Y/N).")
 
-    suicidal_thoughts = None
-    while suicidal_thoughts is None:
-        suicidal_thoughts = input("Have you ever experienced suicidal thoughts (Y/N): ").strip().upper()
-        if suicidal_thoughts == "Y":
+    except:
+        await message.author.send("Invalid input, please enter either a U, M, or H")
+        await message.author.send("Now, how would you describe your diet, (U)unhealthy, (M)oderate, or (H)ealthy?")
+        diet = None
+
+    return diet
+
+#Question 8
+async def suicidal_thoughts(message):
+    content = message.content.strip().upper()
+    try:
+        if content == "Y":
             suicidal_thoughts = 1
-        elif suicidal_thoughts == "N":
+        elif content == "N":
             suicidal_thoughts = 0
         else:
-            print("Invalid input. Please enter 'Y' or 'N'.")
-            suicidal_thoughts = None
+            raise
+        await message.author.send("Alright, now how many hours a week do you spend on studying?")
+    except:
+        await message.author.send("Please enter either a Y or an N.")
+        await message.author.send("Have you ever experienced suicidal thoughts (Y/N).")
 
-    study_hours = None
-    while (study_hours is None):
-        try:
-            study_hours = int(input("How many hours a week do you study? (int): ").strip())
-            if study_hours < 0:
-                raise
-        except:
-            print("Please enter a positive number.")
-            study_hours = None
+#Question 9
+async def study_hours(message):
+    try:
+        study_hours = int(message.content.strip())
+        if(study_hours < 0):
+            raise
+        await message.author.send("Form a scale from 1-5, how much financial pressure are you under?")
+    except:
+        await message.author.send("Please enter a positive whole number.")
+        await message.author.send("Alright, now how many hours a week do you spend on studying?")
+        study_hours = None
+
+    return study_hours
 
     financial_pressure = None
     while (financial_pressure is None):
