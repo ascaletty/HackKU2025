@@ -176,6 +176,9 @@ async def suicidal_thoughts(message):
     except:
         await message.author.send("Please enter either a Y or an N.")
         await message.author.send("Have you ever experienced suicidal thoughts (Y/N).")
+        suicidal_thoughts = None
+
+    return suicidal_thoughts
 
 #Question 9
 async def study_hours(message):
@@ -183,58 +186,65 @@ async def study_hours(message):
         study_hours = int(message.content.strip())
         if(study_hours < 0):
             raise
-        await message.author.send("Form a scale from 1-5, how much financial pressure are you under?")
+        await message.author.send("From a scale from 1-5, how much financial pressure are you under?")
     except:
         await message.author.send("Please enter a positive whole number.")
         await message.author.send("Alright, now how many hours a week do you spend on studying?")
         study_hours = None
 
     return study_hours
-"""
-    financial_pressure = None
-    while (financial_pressure is None):
-        try:
-            financial_pressure = int(input("How much financial pressure are you experiencing? (1-5)(int)): ").strip())
-            if (financial_pressure > 5 or financial_pressure < 1):
-                raise
-        except:
-            print("Please enter a number between 1 and 5.")
-            financial_pressure = None
 
-    family_mental_illness = None
-    while family_mental_illness is None:
-        family_mental_illness = input("Do you have a history of family mental illness? (Y/N): ").strip().upper()
-        if family_mental_illness == 'Y':
+#Question 10
+async def financial_pressure(message):
+    try:
+        financial_pressure = int(message.content.strip())
+        if (financial_pressure > 5 or financial_pressure < 1):
+            raise
+        await message.author.send("Does your family have a history of depression (Y/N)?")
+    except:
+        await message.author.send("I'm sorry, please enter a whole number from 1 to 5")
+        await message.author.send("From a scale from 1-5, how much financial pressure are you under?")
+        financial_pressure = None
+    
+    return financial_pressure
+
+#Question 11
+async def family_mental_illness(message):
+    content = message.content.strip().upper()
+    try:
+        if content == "Y":
             family_mental_illness = 1
-        elif family_mental_illness == 'N':
+        elif content == "N":
             family_mental_illness = 0
         else:
-            print("Invalid input. Please enter 'Y' or 'N'.")
-            family_mental_illness = None
+            raise
+        await message.author.send("Finally, are you currently diagnosed with depression? (Y/N)")
+    except:
+        await message.author.send("Please enter either a Y or an N.")
+        await message.author.send("Does your family have a history of depression (Y/N)?")
+        family_mental_illness = None
 
-    Depression = None
-    while Depression is None:
-        Depression = input("Are you currently diagnosed with depression? (Y/N): ").strip().upper()
-        if Depression == 'Y':
-            Depression = 1
-        elif Depression == 'N':
-            Depression = 0
+    return family_mental_illness
+
+#Question 12
+async def depression(message):
+    content = message.content.strip().upper()
+    try:
+        if content == "Y":
+            depression = 1
+        elif content == "N":
+            depression = 0
         else:
-            print("Invalid input. Please enter 'Y' or 'N'.")
-            Depression = None
+            raise
+        await message.author.send("Thank you very much.")
+    except:
+        await message.author.send("Please enter either a Y or an N.")
+        await message.author.send("Finally, are you currently diagnosed with depression? (Y/N)")
+        depression = None
 
-    data = [
-        gender, age, academic_pressure, CGPA, study_satisfaction, Sleep_hours, diet, suicidal_thoughts, study_hours,
-        financial_pressure, family_mental_illness, Depression
-    ]
+    return depression
 
-    with open("questionaredata/" + file_name, "a", newline="") as file:
-        writer = csv.writer(file)
-        # Write header only if the file is new
-        
-        writer.writerow(data)
-"""
-
+#Function to append new data to a users csv file
 def add_to_file(file_name, data):
     file_exists = os.path.isfile(file_name)
     file = open(file_name, 'a')
