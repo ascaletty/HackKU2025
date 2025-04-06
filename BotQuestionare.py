@@ -23,11 +23,53 @@ async def questionnaire(message):
         data = file.readline().strip().split(',')
         data_length = len(data)
         if data[0] == '':
-            g_data = await gender(message)
-            if g_data is not None:
-                add_to_file(file_name, g_data)
-        elif data_length == 1:
-            print('cool')
+            i_data = await gender(message) # input data gathers whatever data is needed
+            if i_data is not None:
+                add_to_file(file_name, i_data)
+        elif data_length == 2:
+            i_data = await age(message)
+            if i_data is not None:
+                add_to_file(file_name, i_data)
+        elif data_length == 3:
+            i_data = await academic_pressure(message)
+            if i_data is not None:
+                add_to_file(file_name, i_data)
+        elif data_length == 4:
+            i_data = await CGPA(message)
+            if i_data is not None:
+                add_to_file(file_name, i_data)
+        elif data_length == 5:
+            i_data = await study_satisfaction(message)
+            if i_data is not None:
+                add_to_file(file_name, i_data)
+        elif data_length == 6:
+            i_data = await sleep_hours(message)
+            if i_data is not None:
+                add_to_file(file_name, i_data)
+        elif data_length == 7:
+            i_data = await diet(message)
+            if i_data is not None:
+                add_to_file(file_name, i_data)
+        elif data_length == 8:
+            i_data = await suicidal_thoughts(message)
+            if i_data is not None:
+                add_to_file(file_name, i_data)
+        elif data_length == 9:
+            i_data = await study_hours(message)
+            if i_data is not None:
+                add_to_file(file_name, i_data)
+        elif data_length == 10:
+            i_data = await financial_preassures(message)
+            if i_data is not None:
+                add_to_file(file_name, i_data)
+        elif data_length == 11:
+            i_data = await family_mental_illness(message)
+            if i_data is not None:
+                add_to_file(file_name, i_data)
+        elif data_length == 12:
+            i_data = await depression(message)
+            if i_data is not None:
+                add_to_file(file_name, i_data)
 
 
 
