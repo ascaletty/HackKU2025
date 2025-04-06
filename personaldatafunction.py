@@ -3,10 +3,9 @@ import os
 
 def personal_data():
 
-    gender_string = input("What is your Gender: M, F or (O)ther: ").strip().upper()
-
     gender_entered = False
     while not gender_entered:
+        gender_string = input("What is your Gender: M, F or (O)ther: ").strip().upper()
         if gender_string == "M":
             gender = 1
             gender_entered = True
@@ -18,7 +17,6 @@ def personal_data():
             gender_entered = True
         else:
             print("Invalid input. Please enter 'M' or 'F' or 'O'.")
-            return None
         
     age = int(input("Age: ").strip())
 
@@ -43,7 +41,8 @@ def personal_data():
         Sleep_hours = 3
     else:
         Sleep_hours = 4
-    Diet_raw = input("Is your diet (U)nhealthy, (H)ealthy, or (M)oderate?: ").strip()
+        
+    Diet_raw = input("Is your diet (U)nhealthy, (H)ealthy, or (M)oderate?: ").strip().upper()
     diet_entered = False
     while not diet_entered:
         if Diet_raw == "U":
@@ -58,7 +57,8 @@ def personal_data():
         else:
             print("Invalid input. Please enter 'U', 'H', or 'M'.")
             return None
-    Suicidal_Thoughts_raw = input("Have you ever experienced suicidal thoughts (Y/N)").strip()
+        
+    Suicidal_Thoughts_raw = input("Have you ever experienced suicidal thoughts (Y/N)").strip().upper()
     suicidal_thoughts_entered = False
     while not suicidal_thoughts_entered:
         if Suicidal_Thoughts_raw == "Y":
@@ -70,21 +70,34 @@ def personal_data():
         else:
             print("Invalid input. Please enter 'Y' or 'N'.")
             return None
+        
     Study_hours = int(input("How many hours a week do you study? (int): ").strip())
+
     financial_pressure = int(input("How much financial pressure are you experiencing? (1-5)(int)): ").strip())
-    family_mental_illness_raw = int(input("Do you have a history of family mental illness? (Y/N) ").strip().upper())
+
+    family_mental_illness_raw = input("Do you have a history of family mental illness? (Y/N) ").strip().upper()
     family_mental_illness_entered = False
     while not family_mental_illness_entered:
-        if family_mental_illness_raw == Y:
+        if family_mental_illness_raw == 'Y':
             family_mental_illness = 1
             family_mental_illness_entered = True
-        elif family_mental_illness_raw == N:
+        elif family_mental_illness_raw == 'N':
             family_mental_illness = 0
             family_mental_illness_entered = True
         else:
             print("Invalid input. Please enter 'Y' or 'N'.")
             return None
-    Depression = int(input("Are you currently diagnosed with depression?").strip())
+        
+    Depression = None
+    while Depression is None:
+        Depression = input("Are you currently diagnosed with depression? (Y/N): ").strip().upper()
+        if Depression == 'Y':
+            Depression = 1
+        elif Depression == 'N':
+            Depression = 0
+        else:
+            print("Invalid input. Please enter 'Y' or 'N'.")
+            Depression = None
     
     data = [
         gender, age, academic_pressure, work_pressure, CGPA, Study_Satisfaction,
