@@ -35,7 +35,7 @@ with open(file_path, 'r') as file:
 userdf.columns =["0","1","2","3","4","5","6","7","8","9","10","11"]
 userdfnodep= userdf.drop('11', axis=1)
 depression_prediction_raw = model.predict(userdfnodep)
-print('user responses:')
+
 print(userdf)
 if depression_prediction_raw == 1:
     depression_prediction = "yes"
