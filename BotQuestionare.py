@@ -176,14 +176,7 @@ def gender(message):
         writer.writerow(data)
 
 
-<<<<<<< HEAD
 
-def add_to_file(file_name):
-    file = open
-
-# Collect and save data
-
-=======
 def add_to_file(file_name, data):
     file_exists = os.path.isfile("questionaredata/" + file_name)
     file = open("questionaredata/" + file_name, 'a')
