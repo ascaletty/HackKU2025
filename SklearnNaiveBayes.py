@@ -31,7 +31,8 @@ print(f"Accuracy:{accuracy}")
 import sys
 file_path = sys.argv[1]
 with open("questionaredata/"+file_path, 'r') as file:
-    userdf = pd.read_csv(file_path)
+    userdf = pd.read_csv("questionaredata/" +file_path)
+
 userdf.columns =["0","1","2","3","4","5","6","7","8","9","10","11"]
 userdfnodep= userdf.drop('11', axis=1)
 depression_prediction_raw = model.predict(userdfnodep)

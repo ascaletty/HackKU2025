@@ -12,6 +12,11 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.model_selection import train_test_split, KFold, cross_val_score
 import pickle as pk
+import sys
+#file_path = sys.argv[1]
+#with open("questionaredata/"+file_path)
+ #   userdf = pd.read_csv("questionaredata/" +file_path)
+#userdfnodep= userdf.drop('11', axis=1)
 
 # Load dataset 
 depression_data = pd.read_csv('reprocessed_data.csv')

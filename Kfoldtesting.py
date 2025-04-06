@@ -25,7 +25,7 @@ def RFPredictionModelWithKFold():
     model = RandomForestClassifier(n_estimators=100, random_state=42)
     kf = KFold(n_splits=10, shuffle=True, random_state=42)  
     cv_scores = cross_val_score(model, X, y, cv=kf, scoring='precision')
-    
+     
     return [model, cv_scores.mean(), cv_scores.std()]
 
 
