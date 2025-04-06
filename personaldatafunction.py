@@ -17,57 +17,112 @@ def personal_data():
             print("Invalid input. Please enter 'M' or 'F' or 'O'.")
             gender = None
         
-    age = int(input("Age: ").strip())
+    age = None
+    while(age is None):
+        try:
+            age = int(input("Age: ").strip())
+            if age < 0:
+                raise
+        except:
+            print("Please enter a positive number.")
+            age = None
 
-    academic_pressure = int(input("Academic Pressure (1-5)(int)): ").strip())
+    academic_pressure = None
+    while(academic_pressure is None):
+        try:
+            academic_pressure = int(input("Academic Pressure (1-5)(int)): ").strip())
+            if (academic_pressure > 5 or academic_pressure < 1):
+                raise   
+        except:
+            print("Please enter a number between 1 and 5.")
+            academic_pressure = None
 
+    CGPA = None
+    while(CGPA is None):
+        try:
+            CGPA = float(input("What is your GPA(4.0 Scale): ").strip())
+            if (CGPA < 0 or CGPA > 4):
+                raise
+            CGPA = CGPA / 4.0 * 10 
+        except:
+            print("Please enter a positive number.")
+            CGPA = None
 
-    CGPA_raw = float(input("What is your GPA(4.0 Scale): ").strip())
-    CGPA = CGPA_raw / 4.0 * 10 
+    study_satisfaction = None
+    while(study_satisfaction is None):
+        try:
+            study_satisfaction = int(input("study_satisfaction (1-5)(int)): ").strip())
+            if (study_satisfaction > 5 or study_satisfaction < 1):
+                raise   
+        except:
+            print("Please enter a number between 1 and 5.")
+            study_satisfaction = None
 
-    Study_Satisfaction = int(input("How satisfied are you with your studying? (1-5)): ").strip())
+    sleep_hours_raw = float(input("How many hours a night do you sleep?: ").strip())
+    while(sleep_hours_raw is None):
+        try:
+            sleep_hours_raw = int(input("Academic Pressure (1-5)(int)): ").strip())
+            if (sleep_hours_raw > 24 or sleep_hours_raw < 0):
+                raise   
+        except:
+            print("Please enter a number between 0 and 24.")
+            sleep_hours_raw = None
 
-    Sleep_hours_raw = float(input("How many hours a night do you sleep?: ").strip())
-
-    if Sleep_hours_raw < 5:
+    if sleep_hours_raw < 5:
         Sleep_hours = 1
-    elif Sleep_hours_raw < 6.5:
+    elif sleep_hours_raw < 6.5:
         Sleep_hours = 2
-    elif Sleep_hours_raw < 8:
+    elif sleep_hours_raw < 8:
         Sleep_hours = 3
-    elif Sleep_hours_raw >8:
+    elif sleep_hours_raw >8:
         Sleep_hours = 4
     else:
         print("Invalid input. Please enter a number")
 
 
-    Diet = None
-    while Diet is None:
-        Diet = input("Is your diet (U)nhealthy, (H)ealthy, or (M)oderate?: ").strip().upper()
-        if Diet == "U":
-            Diet = 1
-        elif Diet == "M":
-            Diet = 2
-        elif Diet == "H":
-            Diet = 3
+    diet = None
+    while diet is None:
+        diet = input("Is your diet (U)nhealthy, (H)ealthy, or (M)oderate?: ").strip().upper()
+        if diet == "U":
+            diet = 1
+        elif diet == "M":
+            diet = 2
+        elif diet == "H":
+            diet = 3
         else:
             print("Invalid input. Please enter 'U', 'H', or 'M'.")
-            Diet = None
+            diet = None
         
-    Suicidal_Thoughts = None
-    while Suicidal_Thoughts is None:
-        Suicidal_Thoughts = input("Have you ever experienced suicidal thoughts (Y/N): ").strip().upper()
-        if Suicidal_Thoughts == "Y":
-            Suicidal_Thoughts = 1
-        elif Suicidal_Thoughts == "N":
-            Suicidal_Thoughts = 0
+    suicidal_thoughts = None
+    while suicidal_thoughts is None:
+        suicidal_thoughts = input("Have you ever experienced suicidal thoughts (Y/N): ").strip().upper()
+        if suicidal_thoughts == "Y":
+            suicidal_thoughts = 1
+        elif suicidal_thoughts == "N":
+            suicidal_thoughts = 0
         else:
             print("Invalid input. Please enter 'Y' or 'N'.")
-            Suicidal_Thoughts = None
+            suicidal_thoughts = None
         
-    Study_hours = int(input("How many hours a week do you study? (int): ").strip())
+    study_hours = None
+    while(study_hours is None):
+        try:
+            study_hours = int(input("How many hours a week do you study? (int): ").strip())
+            if study_hours < 0:
+                raise
+        except:
+            print("Please enter a positive number.")
+            study_hours = None
 
-    financial_pressure = int(input("How much financial pressure are you experiencing? (1-5)(int)): ").strip())
+    financial_pressure = None
+    while(financial_pressure is None):
+        try:
+            financial_pressure = int(input("How much financial pressure are you experiencing? (1-5)(int)): ").strip())
+            if (financial_pressure > 5 or financial_pressure < 1):
+                raise   
+        except:
+            print("Please enter a number between 1 and 5.")
+            financial_pressure = None
 
     family_mental_illness = None
     while family_mental_illness is None:
@@ -92,7 +147,7 @@ def personal_data():
             Depression = None
     
     data = [
-        gender, age, academic_pressure, CGPA, Study_Satisfaction, Sleep_hours, Diet, Suicidal_Thoughts, Study_hours,
+        gender, age, academic_pressure, CGPA, study_satisfaction, Sleep_hours, diet, suicidal_thoughts, study_hours,
         financial_pressure, family_mental_illness, Depression
     ]
     
