@@ -1,6 +1,7 @@
 import csv
 import os
-
+import sys 
+file_name = sys.argv[1]
 def personal_data():
 
     gender = None
@@ -20,14 +21,11 @@ def personal_data():
 
     academic_pressure = int(input("Academic Pressure (1-5)(int)): ").strip())
 
-    work_pressure = 0
 
     CGPA_raw = float(input("What is your GPA(4.0 Scale): ").strip())
     CGPA = CGPA_raw / 4.0 * 10 
 
     Study_Satisfaction = int(input("How satisfied are you with your studying? (1-5)): ").strip())
-
-    Job_Satisfaction = 0
 
     Sleep_hours_raw = float(input("How many hours a night do you sleep?: ").strip())
 
@@ -37,8 +35,11 @@ def personal_data():
         Sleep_hours = 2
     elif Sleep_hours_raw < 8:
         Sleep_hours = 3
-    else:
+    elif Sleep_hours_raw >8:
         Sleep_hours = 4
+    else:
+        print("Invalid input. Please enter a number")
+
 
     Diet = None
     while Diet is None:
@@ -91,20 +92,19 @@ def personal_data():
             Depression = None
     
     data = [
-        gender, age, academic_pressure, work_pressure, CGPA, Study_Satisfaction,
-        Job_Satisfaction, Sleep_hours, Diet, Suicidal_Thoughts, Study_hours,
+        gender, age, academic_pressure, CGPA, Study_Satisfaction, Sleep_hours, Diet, Suicidal_Thoughts, Study_hours,
         financial_pressure, family_mental_illness, Depression
     ]
     
     # Save data to a CSV file
-    file_exists = os.path.isfile("terrys_data.csv")
-    with open("terrys_data.csv", "a", newline="") as file:
+    file_exists = os.path.isfile(file_name)
+    with open(file_name, "a", newline="") as file:
         writer = csv.writer(file)
         # Write header only if the file is new
         if not file_exists:
             writer.writerow([
-                "Gender", "Age", "Academic Pressure", "Work Pressure", "CGPA",
-                "Study Satisfaction", "Job Satisfaction", "Sleep Hours", "Diet",
+                "Gender", "Age", "Academic Pressure", "CGPA",
+                "Study Satisfaction", "Sleep Hours", "Diet",
                 "Suicidal Thoughts", "Study Hours", "Financial Pressure",
                 "Family Mental Illness", "Depression"
             ])
