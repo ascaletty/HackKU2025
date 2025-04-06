@@ -44,7 +44,7 @@ accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy:.2f}")
 
 import pickle as pk
-pk.dump(model, open('rfcmodel.pkl', 'wb')) #This is to save the model in a pickle file.
+pk.dump(model, open('models/rfcmodel.pkl', 'wb')) #This is to save the model in a pickle file.
 
 # Load Terry's data with the correct header
 terrys_depression_data = pd.read_csv("questionaredata/" +file_path, header=0)  # Ensure the first row is treated as the header

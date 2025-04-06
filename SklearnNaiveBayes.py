@@ -5,7 +5,7 @@ from sklearn.preprocessing import Normalizer
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score
-import pickle
+import pickle as pk
 df= pd.read_csv('reprocessed_data.csv')
 df= df.drop('Job Satisfaction',axis=1)
 df= df.drop('Work Pressure',axis=1)
@@ -23,9 +23,10 @@ y_pred = gnb.fit(X_train, y_train).predict(X_test)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=42)
 gnb = GaussianNB()
 model = gnb.fit(X_train, y_train) 
-
+pk.dump(model, open('models/naive_bayes.pkl', 'wb'))
 y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
+
 print(f"Accuracy:{accuracy}")
 import sys
 file_path = sys.argv[1]
