@@ -1,10 +1,11 @@
 import pandas as pd
-from sklearn.datasets import load_iris
 from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import Normalizer
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score
+>>>>>>> Terry
 df= pd.read_csv('reprocessed_data.csv')
 df= df.drop('Job Satisfaction',axis=1)
 df= df.drop('Work Pressure',axis=1)
@@ -28,8 +29,21 @@ X= df.drop('11', axis=1)
 print(X)
 y= df['11']
 print(y)
+<<<<<<< HEAD
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=0)
 gnb = GaussianNB()
 y_pred = gnb.fit(X_train, y_train).predict(X_test)
 #print("Number of mislabeled points out of a total %d points : %d" (X_test.shape[0], (y_test != y_pred).sum()))
 print(df)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.8, random_state=0)
+gnb = GaussianNB()
+model = gnb.fit(X_train, y_train) 
+
+
+y_pred = model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy:{accuracy}")
+
+#print("Number of mislabeled points out of a total %d points : %d" (X_test.shape[0], (y_test != y_pred).sum()))
+#print(df)
+
