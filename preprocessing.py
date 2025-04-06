@@ -1,5 +1,6 @@
 import pandas as pd #Im using pandas to read the csv file
-
+import sys 
+file_path = sys.argv[1]
 depression_data = pd.read_csv('reprocessed_data.csv') 
 #print(depression_data.head()) #This is just to see the first 5 rows of the data.
 #Here I am creating a variable called depression_data and using the pandas library to read the csv file.
@@ -46,7 +47,7 @@ import pickle as pk
 pk.dump(model, open('rfcmodel.pkl', 'wb')) #This is to save the model in a pickle file.
 
 # Load Terry's data with the correct header
-terrys_depression_data = pd.read_csv('terrys_data.csv', header=0)  # Ensure the first row is treated as the header
+terrys_depression_data = pd.read_csv('file_path', header=0)  # Ensure the first row is treated as the header
 print("Terry's Data (After Loading):")
 print(terrys_depression_data)
 
