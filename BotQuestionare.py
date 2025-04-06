@@ -4,7 +4,7 @@ import sys
 import asyncio
 import discord
 import pandas as pd
-
+from runmodel import runmodel
 
 async def questionnaire(message):
     if message.guild is not None:
@@ -18,6 +18,7 @@ async def questionnaire(message):
             if g_data is not None:
                 add_to_file(file_name, g_data)
                 return
+            return
 
         file.readline()
         data = file.readline().strip().split(',')
@@ -26,50 +27,63 @@ async def questionnaire(message):
             i_data = await gender(message) # input data gathers whatever data is needed
             if i_data is not None:
                 add_to_file(file_name, i_data)
-        elif data_length == 2:
+        elif data_length == 1:
             i_data = await age(message)
             if i_data is not None:
                 add_to_file(file_name, i_data)
-        elif data_length == 3:
+        elif data_length == 2:
             i_data = await academic_pressure(message)
             if i_data is not None:
                 add_to_file(file_name, i_data)
-        elif data_length == 4:
+        elif data_length == 3:
             i_data = await CGPA(message)
             if i_data is not None:
                 add_to_file(file_name, i_data)
-        elif data_length == 5:
+        elif data_length == 4:
             i_data = await study_satisfaction(message)
             if i_data is not None:
                 add_to_file(file_name, i_data)
-        elif data_length == 6:
+        elif data_length == 5:
             i_data = await sleep_hours(message)
             if i_data is not None:
                 add_to_file(file_name, i_data)
-        elif data_length == 7:
+        elif data_length == 6:
             i_data = await diet(message)
             if i_data is not None:
                 add_to_file(file_name, i_data)
-        elif data_length == 8:
+        elif data_length == 7:
             i_data = await suicidal_thoughts(message)
             if i_data is not None:
                 add_to_file(file_name, i_data)
-        elif data_length == 9:
+        elif data_length == 8:
             i_data = await study_hours(message)
             if i_data is not None:
                 add_to_file(file_name, i_data)
-        elif data_length == 10:
-            i_data = await financial_preassures(message)
+        elif data_length == 9:
+            i_data = await financial_pressure(message)
             if i_data is not None:
                 add_to_file(file_name, i_data)
-        elif data_length == 11:
+        elif data_length == 10:
             i_data = await family_mental_illness(message)
             if i_data is not None:
                 add_to_file(file_name, i_data)
-        elif data_length == 12:
+        elif data_length == 11:
             i_data = await depression(message)
             if i_data is not None:
                 add_to_file(file_name, i_data)
+                result = runmodel(file_name)
+                if result:
+                    await message.author.send('You at risk for depression, here are some resources to get a much more '
+                                              'accurate diagnose, along with understanding potential symptoms:\n'
+                                              'https://www.nimh.nih.gov/health/publications/depression')
+                elif not result:
+                    await message.author.send('You are at a low risk of depression')
+                file.close()
+                os.remove(file_name)
+        elif data_length == 12:
+            file.close()
+            os.remove(file_name)
+
 
 
 
@@ -104,7 +118,7 @@ async def gender(message):
 async def age(message):
     try:
         age = int(message.content.strip())
-        if(age < 0):
+        if(age < 0 or age > 123):
             raise
         await message.author.send("Alright, now how pressured do you feel to perform well academically from 1-5?")
     except:
@@ -168,7 +182,7 @@ async def sleep_hours(message):
             sleep_hours = 1
         elif sleep_hours_raw < 6.5:
             sleep_hours = 2
-        elif sleep_hours_raw < 8:
+        elif sleep_hours_raw <= 8:
             sleep_hours = 3
         elif sleep_hours_raw > 8:
             sleep_hours = 4
@@ -226,7 +240,7 @@ async def suicidal_thoughts(message):
 async def study_hours(message):
     try:
         study_hours = int(message.content.strip())
-        if(study_hours < 0):
+        if(study_hours < 0 or study_hours > 168):
             raise
         await message.author.send("From a scale from 1-5, how much financial pressure are you under?")
     except:
