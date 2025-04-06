@@ -29,11 +29,11 @@ class DepressoBot:
         async def on_message(message):
             if message.author == self.client.user:
                 return
-            elif 'could i have depression?' in message.content.lower():
-                await message.channel.send
+            elif message.guild is None:  # if dm
                 await questionnaire(message)
-                await user.send('Sick')
-                await message.channel.send('who knows?')
+            elif 'could i have depression?' in message.content.lower():
+                await message.channel.send(f'Are you okay {message.author}? Check your DMs')
+                await questionnaire(message)
 
 
 
