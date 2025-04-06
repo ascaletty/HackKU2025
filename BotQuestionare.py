@@ -1,6 +1,7 @@
 import csv
 import os
 import sys
+import asyncio
 import discord
 import pandas as pd
 
@@ -9,15 +10,26 @@ async def questionnaire(message):
     if message.guild is not None:
         await intro(message)
     else:  # if the message is a dm
+        file_name = "questionaredata/" + message.author.name + ".csv"
+        try:
+            file = open(file_name)
+        except FileNotFoundError:
+            g_data = await gender(message)
+            if g_data is not None:
+                add_to_file(file_name, g_data)
+                return
 
-        file_name = "questionaredata/" + message.author + ".csv"
-        file = open(file_name)
         file.readline()
         data = file.readline().strip().split(',')
-        print(data)
         data_length = len(data)
-        if data_length == 0:
-            await intro(message)
+        if data[0] == '':
+            g_data = await gender(message)
+            if g_data is not None:
+                add_to_file(file_name, g_data)
+        elif data_length == 1:
+            print('cool')
+
+
 
 
 async def intro(message):
@@ -178,7 +190,7 @@ async def study_hours(message):
         study_hours = None
 
     return study_hours
-
+"""
     financial_pressure = None
     while (financial_pressure is None):
         try:
@@ -221,12 +233,11 @@ async def study_hours(message):
         # Write header only if the file is new
         
         writer.writerow(data)
-
-
+"""
 
 def add_to_file(file_name, data):
-    file_exists = os.path.isfile("questionaredata/" + file_name)
-    file = open("questionaredata/" + file_name, 'a')
+    file_exists = os.path.isfile(file_name)
+    file = open(file_name, 'a')
     if not file_exists:
         file.write("Gender, Age, Academic Pressure, CGPA,")
         file.write("Study Satisfaction, Sleep Hours, Diet,")
