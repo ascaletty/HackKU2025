@@ -23,11 +23,13 @@ async def questionnaire(message):
         data = file.readline().strip().split(',')
         data_length = len(data)
         if data[0] == '':
-            g_data = await gender(message)
-            if g_data is not None:
-                add_to_file(file_name, g_data)
-        elif data_length == 1:
-            print('cool')
+            i_data = await gender(message) # input data gathers whatever data is needed
+            if i_data is not None:
+                add_to_file(file_name, i_data)
+        elif data_length == 2:
+            i_data = await age(message)
+            if i_data is not None:
+                add_to_file(file_name, i_data)
 
 
 
