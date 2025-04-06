@@ -47,7 +47,7 @@ import pickle as pk
 pk.dump(model, open('rfcmodel.pkl', 'wb')) #This is to save the model in a pickle file.
 
 # Load Terry's data with the correct header
-terrys_depression_data = pd.read_csv(file_path, header=0)  # Ensure the first row is treated as the header
+terrys_depression_data = pd.read_csv("questionaredata/" +file_path, header=0)  # Ensure the first row is treated as the header
 print("Terry's Data (After Loading):")
 print(terrys_depression_data)
 

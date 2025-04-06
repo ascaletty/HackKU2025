@@ -31,7 +31,7 @@ def RFPredictionModelWithKFold():
 
 
 
-"""
+
 # Load Terry's data with the correct header
 terrys_depression_data = pd.read_csv('terrys_data.csv', header=0)  # Ensure the first row is treated as the header
 print("Terry's Data (After Loading):")
@@ -109,12 +109,12 @@ numerical_depression_data = depression_data.select_dtypes(include=['int64', 'flo
 correlation_matrix = numerical_depression_data.corr()  # Calculate the correlation matrix
 
 # Plot the heatmap
-'''
+
 plt.figure(figsize=(10, 8))
 sns.heatmap(correlation_matrix, annot=True, cmap='cubehelix_r', fmt='.2f')
 plt.title('Correlation Matrix')
 plt.show()
-'''
+
 
 #Terry's Branch
 from sklearn.ensemble import RandomForestClassifier  # Import RandomForestClassifier
@@ -197,4 +197,4 @@ else:
 # Print the prediction result
 print(f"Terry's Depression Prediction: {terrys_depression_prediction}")
 
-"""
+
