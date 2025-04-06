@@ -20,8 +20,12 @@ import sys
 
 # Load dataset 
 depression_data = pd.read_csv('reprocessed_data.csv')
-X = depression_data.drop(columns=['Depression'])  # Features
-y = depression_data['Depression']  # Target
+depression_data = depression_data.drop(columns=['Job Satisfaction'])
+depression_data = depression_data.drop(columns=['Work Pressure'])
+depression_data.columns = ["0","1","2","3","4","5","6","7","8","9","10","11"]
+
+X = depression_data.drop(columns=['11'])  # Features
+y = depression_data['11']  # Target
 
 # Logistic Regression
 def LogisticRegressionModel():
