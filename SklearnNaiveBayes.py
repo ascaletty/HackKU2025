@@ -11,15 +11,15 @@ df= df.drop('Job Satisfaction',axis=1)
 df= df.drop('Work Pressure',axis=1)
 df.columns =["0","1","2","3","4","5","6","7","8","9","10","11"]
 X= df.drop('11', axis=1)
-print(X)
+#print(X)
 y= df['11']
-print(y)
+#print(y)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 gnb = GaussianNB()
 y_pred = gnb.fit(X_train, y_train).predict(X_test)
 #print("Number of mislabeled points out of a total %d points : %d" (X_test.shape[0], (y_test != y_pred).sum()))
-print(df)
+#print(df)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=42)
 gnb = GaussianNB()
 model = gnb.fit(X_train, y_train) 
@@ -35,6 +35,8 @@ with open(file_path, 'r') as file:
 userdf.columns =["0","1","2","3","4","5","6","7","8","9","10","11"]
 userdfnodep= userdf.drop('11', axis=1)
 depression_prediction_raw = model.predict(userdfnodep)
+print('user responses:')
+print(userdf)
 if depression_prediction_raw == 1:
     depression_prediction = "yes"
 else:
