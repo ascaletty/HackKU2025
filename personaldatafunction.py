@@ -41,6 +41,7 @@ def personal_data():
         Sleep_hours = 3
     else:
         Sleep_hours = 4
+        
     Diet_raw = input("Is your diet (U)nhealthy, (H)ealthy, or (M)oderate?: ").strip().upper()
     diet_entered = False
     while not diet_entered:
@@ -56,6 +57,7 @@ def personal_data():
         else:
             print("Invalid input. Please enter 'U', 'H', or 'M'.")
             return None
+        
     Suicidal_Thoughts_raw = input("Have you ever experienced suicidal thoughts (Y/N)").strip().upper()
     suicidal_thoughts_entered = False
     while not suicidal_thoughts_entered:
@@ -68,8 +70,11 @@ def personal_data():
         else:
             print("Invalid input. Please enter 'Y' or 'N'.")
             return None
+        
     Study_hours = int(input("How many hours a week do you study? (int): ").strip())
+
     financial_pressure = int(input("How much financial pressure are you experiencing? (1-5)(int)): ").strip())
+
     family_mental_illness_raw = input("Do you have a history of family mental illness? (Y/N) ").strip().upper()
     family_mental_illness_entered = False
     while not family_mental_illness_entered:
