@@ -5,13 +5,24 @@ import discord
 import pandas as pd
 
 
-def questionaire(message):
+async def questionaire(message):
+
     file_name = "questionaredata/" + message.author + ".csv"
     file = open(file_name)
     file.readline()
     data = file.readline().strip().split(',')
     print(data)
+    data_length = len(data)
 
+async def intro(message):
+    await message.author.send("Hi! I'm DepressoBot, your friendly AI depression indicator!\n"
+                              "But before we test you using our machine learning powered questionare, but first, "
+                              "there's something we need to discuss\n"
+                              "THIS IS NOT A MEDICAL DIAGNOSIS. This is just a fun questionare made for HACKKU25")
+
+
+
+def gender(message):
     gender = None
     while gender is None:
         gender_string = input("What is your Gender: M, F or (O)ther: ").strip().upper()
@@ -180,4 +191,4 @@ def add_to_file(file_name):
     file = open
 
 # Collect and save data
-Terrys_data = personal_data()
+
