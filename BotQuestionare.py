@@ -94,9 +94,10 @@ async def questionnaire(message):
 
 async def intro(message):
     await message.author.send("Hi! I'm DepressoBot, your friendly AI depression indicator!\n"
-                              "But before we test you using our machine learning powered questionare, but first, "
+                              "But before we test you using our machine learning powered questionare "
                               "there's something we need to discuss\n"
-                              "THIS IS NOT A MEDICAL DIAGNOSIS. This is just a fun questionare made for HACKKU25")
+                              "THIS IS NOT A MEDICAL DIAGNOSIS. This is just a fun questionare made for HACKKU25; "
+                              "we are not doctors, just a bunch of caffeinated coders")
     await message.author.send("First question: what is your gender? Please respond M, F, or O")
 
 
