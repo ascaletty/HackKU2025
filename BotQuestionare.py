@@ -73,9 +73,11 @@ async def questionnaire(message):
                 add_to_file(file_name, i_data)
                 result = runmodel(file_name)
                 if result:
-                    await message.author.send('You at risk for depression')
+                    await message.author.send('You at risk for depression, here are some resources to get a much more '
+                                              'accurate diagnose, along with understanding potential symptoms:\n'
+                                              'https://www.nimh.nih.gov/health/publications/depression')
                 elif not result:
-                    await message.author.send('You are depression free')
+                    await message.author.send('You are at a low risk of depression')
                 file.close()
                 os.remove(file_name)
         elif data_length == 12:
