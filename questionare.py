@@ -153,7 +153,8 @@ def personal_data():
     
     # Save data to a CSV file
     file_exists = os.path.isfile(file_name)
-    with open(file_name, "a", newline="") as file:
+
+    with open("questionaredata/" + file_name, "a", newline="") as file:
         writer = csv.writer(file)
         # Write header only if the file is new
         if not file_exists:
