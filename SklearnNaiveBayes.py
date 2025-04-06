@@ -5,7 +5,7 @@ from sklearn.preprocessing import Normalizer
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score
-
+import pickle
 df= pd.read_csv('reprocessed_data.csv')
 df= df.drop('Job Satisfaction',axis=1)
 df= df.drop('Work Pressure',axis=1)
@@ -24,7 +24,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_
 gnb = GaussianNB()
 model = gnb.fit(X_train, y_train) 
 
-
 y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy:{accuracy}")
@@ -36,11 +35,12 @@ with open("questionaredata/"+file_path, 'r') as file:
 userdf.columns =["0","1","2","3","4","5","6","7","8","9","10","11"]
 userdfnodep= userdf.drop('11', axis=1)
 depression_prediction_raw = model.predict(userdfnodep)
-
 print(userdf)
 if depression_prediction_raw == 1:
-    depression_prediction = "yes"
+        depression_prediction = True
+        print(depression_prediction)
 else:
-    depression_prediction = "no"
-print(f"Depression Prediction {depression_prediction}")
+        depression_prediction = False
+        print(depression_prediction)
+        
 
