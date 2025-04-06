@@ -5,7 +5,7 @@ Simple Discord bot to handle user input bc I'm too lazy to learn web dev stuff, 
 import os
 import discord
 from dotenv import load_dotenv  # simple library to save me from getting my key doxed
-from BotQuestionare import questionaire
+from BotQuestionare import questionnaire
 from discord.ext import commands
 
 
@@ -29,12 +29,9 @@ class DepressoBot:
         async def on_message(message):
             if message.author == self.client.user:
                 return
-            if message.guild is None:  # if the message is a dm
-                await message.author.send('You have been singled out')
-                questionaire(message)
-
-            if 'could i have depression?' in message.content.lower():
-                user = message.author
+            elif 'could i have depression?' in message.content.lower():
+                await message.channel.send
+                await questionnaire(message)
                 await user.send('Sick')
                 await message.channel.send('who knows?')
 

@@ -5,37 +5,47 @@ import discord
 import pandas as pd
 
 
-async def questionaire(message):
+async def questionnaire(message):
+    if message.guild is not None:
+        await intro(message)
+    else:  # if the message is a dm
 
-    file_name = "questionaredata/" + message.author + ".csv"
-    file = open(file_name)
-    file.readline()
-    data = file.readline().strip().split(',')
-    print(data)
-    data_length = len(data)
+        file_name = "questionaredata/" + message.author + ".csv"
+        file = open(file_name)
+        file.readline()
+        data = file.readline().strip().split(',')
+        print(data)
+        data_length = len(data)
+        if data_length == 0:
+            await intro(message)
+
 
 async def intro(message):
     await message.author.send("Hi! I'm DepressoBot, your friendly AI depression indicator!\n"
                               "But before we test you using our machine learning powered questionare, but first, "
                               "there's something we need to discuss\n"
                               "THIS IS NOT A MEDICAL DIAGNOSIS. This is just a fun questionare made for HACKKU25")
+    await message.author.send("First question: what is your gender? Please respond M, F, or O")
 
 
 
-def gender(message):
-    gender = None
-    while gender is None:
-        gender_string = input("What is your Gender: M, F or (O)ther: ").strip().upper()
-        if gender_string == "M":
-            gender = 1
-        elif gender_string == "F":
-            gender = 0
-        elif gender_string == "O":
-            gender = 0
-        else:
-            print("Invalid input. Please enter 'M' or 'F' or 'O'.")
-            gender = None
+async def gender(message):
+    if message.content.strip() == "M":
+        gender_i = 1
+        add_to_file(message)
+    elif message.content.strip() == "F":
+        gender_i = 0
+    elif message.content.strip() == "O":
+        gender_i = 0
+    else:
+        await message.author.send("Invalid answer, try again!")
+        await message.author.send("First question: what is your gender? Please respond M, F, or O")
+        gender_i = None
+    return gender_i
 
+
+
+async def age:
     age = None
     while (age is None):
         try:
