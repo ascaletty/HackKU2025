@@ -18,44 +18,48 @@ depression_data = pd.read_csv('reprocessed_data.csv')
 X = depression_data.drop(columns=['Depression'])  # Features
 y = depression_data['Depression']  # Target
 
-
+# Logistic Regression
 def LogisticRegressionModel():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
     model = LogisticRegression(random_state=42)
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
-    print(f"Logistic Regression Accuracy: {accuracy:.2f}")
+    precision = precision_score(y_test, y_pred)
+    print(f"Logistic Regression - Accuracy: {accuracy:.3f}, Precision: {precision:.3f}")
     return model
 
-
+# Support Vector Machine (SVM)
 def SVMModel():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
     model = SVC(kernel='rbf', random_state=42)
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
-    print(f"SVM Accuracy: {accuracy:.2f}")
+    precision = precision_score(y_test, y_pred)
+    print(f"SVM - Accuracy: {accuracy:.2f}, Precision: {precision:.2f}")
     return model
 
-
+# K-Nearest Neighbors (KNN)
 def KNNModel():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
     model = KNeighborsClassifier(n_neighbors=5)
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
-    print(f"KNN Accuracy: {accuracy:.2f}")
+    precision = precision_score(y_test, y_pred)
+    print(f"KNN - Accuracy: {accuracy:.2f}, Precision: {precision:.2f}")
     return model
 
-
+# Decision Tree
 def DecisionTreeModel():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
     model = DecisionTreeClassifier(random_state=42)
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
-    print(f"Decision Tree Accuracy: {accuracy:.2f}")
+    precision = precision_score(y_test, y_pred)
+    print(f"Decision Tree - Accuracy: {accuracy:.2f}, Precision: {precision:.2f}")
     return model
 
 # Naive Bayes
@@ -65,29 +69,31 @@ def NaiveBayesModel():
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
-    print(f"Naive Bayes Accuracy: {accuracy:.2f}")
+    precision = precision_score(y_test, y_pred)
+    print(f"Naive Bayes - Accuracy: {accuracy:.2f}, Precision: {precision:.2f}")
     return model
 
-
+# Neural Network (MLPClassifier)
 def NeuralNetworkModel():
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=41, stratify=y)
     model = MLPClassifier(hidden_layer_sizes=(100,), max_iter=500, random_state=42)
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
-    print(f"Neural Network Accuracy: {accuracy:.2f}")
+    precision = precision_score(y_test, y_pred)
+    print(f"Neural Network - Accuracy: {accuracy:.3f}, Precision: {precision:.3f}")
     return model
 
+# Random Forest
 def RFPredictionModel():
-
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=50, stratify=y)
     model = RandomForestClassifier(n_estimators=100, random_state=42)
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
     precision = precision_score(y_test, y_pred)
-
-    return [model, accuracy, precision]
+    print(f"Random Forest - Accuracy: {accuracy:.3f}, Precision: {precision:.3f}")
+    return model
 
 def RFPredictionModelWithKFold():
 
@@ -100,11 +106,12 @@ def RFPredictionModelWithKFold():
 def main():
     # Train and evaluate models
     logistic_model = LogisticRegressionModel()
-    svm_model = SVMModel()
+    # svm_model = SVMModel()
     knn_model = KNNModel()
     decision_tree_model = DecisionTreeModel()
     naive_bayes_model = NaiveBayesModel()
     neural_network_model = NeuralNetworkModel()
     rf_model = RFPredictionModel()
-    
+    pk.dump(rf_model, open('models/randomforestmodel.pkl', 'wb'))  # Save the model in a pickle file.
+
 main()
