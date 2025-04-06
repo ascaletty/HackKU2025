@@ -78,7 +78,7 @@ async def questionnaire(message):
                 result = runmodel(file_name)
                 if result:
                     await message.author.send('You at risk for depression, here are some resources to get a much more '
-                                              'accurate diagnose, along with understanding potential symptoms:\n'
+                                              'accurate diagnosis, along with understanding potential symptoms:\n'
                                               'https://www.nimh.nih.gov/health/publications/depression')
                 elif not result:
                     await message.author.send('You are at a low risk of depression')
