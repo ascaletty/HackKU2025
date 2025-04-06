@@ -32,15 +32,18 @@ async def intro(message):
 async def gender(message):
     if message.content.strip() == "M":
         gender_i = 1
-        add_to_file(message)
+        await message.author.send("Now, what's your age?")
     elif message.content.strip() == "F":
         gender_i = 0
+        await message.author.send("Now, what's your age?")
     elif message.content.strip() == "O":
         gender_i = 0
+        await message.author.send("Now, what's your age?")
     else:
         await message.author.send("Invalid answer, try again!")
         await message.author.send("First question: what is your gender? Please respond M, F, or O")
         gender_i = None
+
     return gender_i
 
 
