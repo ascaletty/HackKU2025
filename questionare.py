@@ -1,166 +1,107 @@
 import csv
 import os
-import sys 
-file_name = sys.argv[1]
+import sys
+file_path = sys.argv[1]
 def personal_data():
 
-    gender = None
-    while gender is None:
-        gender_string = input("What is your Gender: M, F or (O)ther: ").strip().upper()
+    gender_string = input("What is your Gender: M, F or (O)ther: ").strip().upper()
+
+    gender_entered = False
+    while not gender_entered:
         if gender_string == "M":
             gender = 1
+            gender_entered = True
         elif gender_string == "F":
             gender = 0
+            gender_entered = True
         elif gender_string == "O":
             gender = 0
+            gender_entered = True
         else:
             print("Invalid input. Please enter 'M' or 'F' or 'O'.")
-            gender = None
+            return None
         
-    age = None
-    while(age is None):
-        try:
-            age = int(input("Age: ").strip())
-            if age < 0:
-                raise
-        except:
-            print("Please enter a positive number.")
-            age = None
+    age = int(input("Age: ").strip())
 
-    academic_pressure = None
-    while(academic_pressure is None):
-        try:
-            academic_pressure = int(input("Academic Pressure (1-5)(int)): ").strip())
-            if (academic_pressure > 5 or academic_pressure < 1):
-                raise   
-        except:
-            print("Please enter a number between 1 and 5.")
-            academic_pressure = None
+    academic_pressure = int(input("Academic Pressure (1-5)(int)): ").strip())
 
-    CGPA = None
-    while(CGPA is None):
-        try:
-            CGPA = float(input("What is your GPA(4.0 Scale): ").strip())
-            if (CGPA < 0 or CGPA > 4):
-                raise
-            CGPA = CGPA / 4.0 * 10 
-        except:
-            print("Please enter a positive number.")
-            CGPA = None
+    work_pressure = 0
 
-    study_satisfaction = None
-    while(study_satisfaction is None):
-        try:
-            study_satisfaction = int(input("study_satisfaction (1-5)(int)): ").strip())
-            if (study_satisfaction > 5 or study_satisfaction < 1):
-                raise   
-        except:
-            print("Please enter a number between 1 and 5.")
-            study_satisfaction = None
+    CGPA_raw = float(input("What is your GPA(4.0 Scale): ").strip())
+    CGPA = CGPA_raw / 4.0 * 10 
 
-    sleep_hours_raw = float(input("How many hours a night do you sleep?: ").strip())
-    while(sleep_hours_raw is None):
-        try:
-            sleep_hours_raw = int(input("Academic Pressure (1-5)(int)): ").strip())
-            if (sleep_hours_raw > 24 or sleep_hours_raw < 0):
-                raise   
-        except:
-            print("Please enter a number between 0 and 24.")
-            sleep_hours_raw = None
+    Study_Satisfaction = int(input("How satisfied are you with your studying? (1-5)): ").strip())
 
-    if sleep_hours_raw < 5:
+    Job_Satisfaction = 0
+
+    Sleep_hours_raw = float(input("How many hours a night do you sleep? ").strip())
+
+    if Sleep_hours_raw < 5:
         Sleep_hours = 1
-    elif sleep_hours_raw < 6.5:
+    elif Sleep_hours_raw < 6.5:
         Sleep_hours = 2
-    elif sleep_hours_raw < 8:
+    elif Sleep_hours_raw < 8:
         Sleep_hours = 3
-    elif sleep_hours_raw >8:
-        Sleep_hours = 4
     else:
-        print("Invalid input. Please enter a number")
-
-
-    diet = None
-    while diet is None:
-        diet = input("Is your diet (U)nhealthy, (H)ealthy, or (M)oderate?: ").strip().upper()
-        if diet == "U":
-            diet = 1
-        elif diet == "M":
-            diet = 2
-        elif diet == "H":
-            diet = 3
+        Sleep_hours = 4
+    Diet_raw = input("Is your diet (U)nhealthy, (H)ealthy, or (M)oderate?: ").strip()
+    diet_entered = False
+    while not diet_entered:
+        if Diet_raw == "U":
+            Diet = 1
+            diet_entered = True
+        elif Diet_raw == "M":
+            Diet = 2
+            diet_entered = True
+        elif Diet_raw == "H":
+            Diet = 3
+            diet_entered = True
         else:
             print("Invalid input. Please enter 'U', 'H', or 'M'.")
-            diet = None
-        
-    suicidal_thoughts = None
-    while suicidal_thoughts is None:
-        suicidal_thoughts = input("Have you ever experienced suicidal thoughts (Y/N): ").strip().upper()
-        if suicidal_thoughts == "Y":
-            suicidal_thoughts = 1
-        elif suicidal_thoughts == "N":
-            suicidal_thoughts = 0
+            return None
+    Suicidal_Thoughts_raw = input("Have you ever experienced suicidal thoughts (Y/N)").strip()
+    suicidal_thoughts_entered = False
+    while not suicidal_thoughts_entered:
+        if Suicidal_Thoughts_raw == "Y":
+            Suicidal_Thoughts = 1
+            suicidal_thoughts_entered = True
+        elif Suicidal_Thoughts_raw == "N":
+            Suicidal_Thoughts = 0
+            suicidal_thoughts_entered = True
         else:
             print("Invalid input. Please enter 'Y' or 'N'.")
-            suicidal_thoughts = None
-        
-    study_hours = None
-    while(study_hours is None):
-        try:
-            study_hours = int(input("How many hours a week do you study? (int): ").strip())
-            if study_hours < 0:
-                raise
-        except:
-            print("Please enter a positive number.")
-            study_hours = None
-
-    financial_pressure = None
-    while(financial_pressure is None):
-        try:
-            financial_pressure = int(input("How much financial pressure are you experiencing? (1-5)(int)): ").strip())
-            if (financial_pressure > 5 or financial_pressure < 1):
-                raise   
-        except:
-            print("Please enter a number between 1 and 5.")
-            financial_pressure = None
-
-    family_mental_illness = None
-    while family_mental_illness is None:
-        family_mental_illness = input("Do you have a history of family mental illness? (Y/N): ").strip().upper()
-        if family_mental_illness == 'Y':
+            return None
+    Study_hours = int(input("How many hours a week do you study? (int): ").strip())
+    financial_pressure = int(input("How much financial pressure are you experiencing? (1-5)(int)): ").strip())
+    family_mental_illness_raw = int(input("Do you have a history of family mental illness? (Y/N) ").strip().upper())
+    family_mental_illness_entered = False
+    while not family_mental_illness_entered:
+        if family_mental_illness_raw == Y:
             family_mental_illness = 1
-        elif family_mental_illness == 'N':
+            family_mental_illness_entered = True
+        elif family_mental_illness_raw == N:
             family_mental_illness = 0
+            family_mental_illness_entered = True
         else:
             print("Invalid input. Please enter 'Y' or 'N'.")
-            family_mental_illness = None
-        
-    Depression = None
-    while Depression is None:
-        Depression = input("Are you currently diagnosed with depression? (Y/N): ").strip().upper()
-        if Depression == 'Y':
-            Depression = 1
-        elif Depression == 'N':
-            Depression = 0
-        else:
-            print("Invalid input. Please enter 'Y' or 'N'.")
-            Depression = None
+            return None
+    Depression = int(input("Are you currently diagnosed with depression?").strip())
     
     data = [
-        gender, age, academic_pressure, CGPA, study_satisfaction, Sleep_hours, diet, suicidal_thoughts, study_hours,
+        gender, age, academic_pressure, work_pressure, CGPA, Study_Satisfaction,
+        Job_Satisfaction, Sleep_hours, Diet, Suicidal_Thoughts, Study_hours,
         financial_pressure, family_mental_illness, Depression
     ]
     
     # Save data to a CSV file
-    file_exists = os.path.isfile(file_name)
-
-    with open("questionaredata/" + file_name, "a", newline="") as file:
+    file_exists = os.path.isfile("terrys_data.csv")
+    with open("questionaredata/" + file_path, "a", newline="") as file:
         writer = csv.writer(file)
         # Write header only if the file is new
         if not file_exists:
             writer.writerow([
-                "Gender", "Age", "Academic Pressure", "CGPA",
-                "Study Satisfaction", "Sleep Hours", "Diet",
+                "Gender", "Age", "Academic Pressure", "Work Pressure", "CGPA",
+                "Study Satisfaction", "Job Satisfaction", "Sleep Hours", "Diet",
                 "Suicidal Thoughts", "Study Hours", "Financial Pressure",
                 "Family Mental Illness", "Depression"
             ])
