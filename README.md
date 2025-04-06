@@ -17,6 +17,8 @@ how to run it:
 2) load your .env file with DISCORD_TOKEN = {your bot token here} and DISCORD_GUILD = {name of your discord server here}
 3) Run the DicordBot.py file
 4) Enjoy DepressoBot!
+
+
 Running SKilearnRandomForests.py amd SKilearnNaiveBayers.py
 1.run python Pyquestions.py yourname.csv
 2.run python SkleanRandomForests.py or SKilearnNaiveBayes.py with the argument yourname.csv
