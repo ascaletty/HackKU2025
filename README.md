@@ -3,3 +3,6 @@
 
 HackKU2025 project using this kaggle database on depression
 https://www.kaggle.com/datasets/hopesb/student-depression-dataset
+
+
+[!How to run!]
