@@ -5,8 +5,8 @@ HackKU2025 project using this kaggle database on depression
 https://www.kaggle.com/datasets/hopesb/student-depression-dataset
 
 
-#How to run it
-##Necessary Libraries
+#How to run it\n
+##Necessary Libraries\n
 libraries used:
 [Discord's .py library](https://discordpy.readthedocs.io/en/stable/intro.html) 
 [dotenv for key management](https://pypi.org/project/python-dotenv/)
